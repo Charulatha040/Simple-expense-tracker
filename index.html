@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Expense Tracker</title>
+</head>
+<body>
+    <h1>Simple Expense Tracker</h1>
+    <form id="expense-form">
+        <input type="date" name="date" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <button type="submit">Add Expense</button>
+    </form>
+    <h2>Expenses</h2>
+    <ul id="expense-list">
+        <!-- List of expenses will be populated here -->
+    </ul>
+
+    <script>
+        const form = document.getElementById('expense-form');
+        const expenseList = document.getElementById('expense-list');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const date = formData.get('date');
+            const category = formData.get('category');
+            const description = formData.get('description');
+            const amount = formData.get('amount');
+
+            const listItem = document.createElement('li');
+            listItem.textContent = `${date} - ${category}: $${amount} (${description})`;
+            expenseList.appendChild(listItem);
+
+            form.reset(); // Clear the form
+        });
+    </script>
+</body>
+</html>
